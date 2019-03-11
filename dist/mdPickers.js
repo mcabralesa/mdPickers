@@ -236,9 +236,15 @@ function CalendarCtrl($scope) {
     );
     
     this.daysInMonth = [];
+
+
+    function daysInThisMonth() {
+        var now = new Date();
+        return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+    }
     
     this.getDaysInMonth = function() {
-        var days = self.date.daysInMonth(),
+        var days = daysInThisMonth(),
             firstDay = moment(self.date).date(1).day() - this.dow;
             
         if(firstDay < 0) firstDay = this.weekDays.length - 1;
