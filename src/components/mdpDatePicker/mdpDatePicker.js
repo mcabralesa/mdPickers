@@ -161,7 +161,8 @@ module.provider("$mdpDatePicker", function() {
 });
 
 function CalendarCtrl($scope) {
-	var self = this;
+    var self = this;
+    this.date = moment(new Date());
 	this.dow = moment.localeData().firstDayOfWeek();
 	
     this.weekDays = [].concat(
@@ -176,14 +177,8 @@ function CalendarCtrl($scope) {
     
     this.daysInMonth = [];
 
-
-    function daysInThisMonth() {
-        var now = new Date();
-        return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
-    }
-    
-    this.getDaysInMonth = function() {
-        var days = daysInThisMonth(),
+      this.getDaysInMonth = function() {
+        var days = self.date.daysInMonth(),
             firstDay = moment(self.date).date(1).day() - this.dow;
             
         if(firstDay < 0) firstDay = this.weekDays.length - 1;
