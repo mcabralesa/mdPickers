@@ -618,8 +618,13 @@ module.provider("$mdpDatePicker", function() {
 });
 
 function CalendarCtrl($scope) {
+    var currentDay = new Date();
+    currentDay = new Date(currentDay.getFullYear(), currentDay.getMonth(), currentDay.getDay());
+    var algo = moment(this.date.format("YYYY/MM/DD"), "YYYY/MM/DD").toDate();
     var self = this;
-    this.date = moment(new Date());
+    if (algo.getTime() === currentDay.getTime()) {
+        this.date = moment(new Date());
+    }
 	this.dow = moment.localeData().firstDayOfWeek();
 	
     this.weekDays = [].concat(
